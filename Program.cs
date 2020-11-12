@@ -60,6 +60,7 @@ namespace AffineDecipher
         {
 
             string text;
+            int printCount;
 
             Console.WriteLine("Text:");
             string input = Console.ReadLine();
@@ -73,11 +74,16 @@ namespace AffineDecipher
                 text = input.ToLower();
             }
 
+            Console.Write("Print top how many?> ");
+            printCount = int.Parse(Console.ReadLine());
+
             List<Decoding> decodings = GetAllDecodings(text);
 
             decodings.Sort((valueA, valueB) => valueA.difference.CompareTo(valueB.difference));
-            
-            for (int i = 0; i < decodings.Count; i++)
+
+            if (printCount > decodings.Count) printCount = decodings.Count;
+
+            for (int i = 0; i < printCount; i++)
             {
 
                 Decoding decoding = decodings[i];
